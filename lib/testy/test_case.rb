@@ -1,8 +1,14 @@
 module Testy
   class TestCase
-    @method_list = []
-    
+    def self.instance
+      @instance ||= new
+    end
+
     def self.test(name, &block)
+      instance.test name, &block
+    end
+
+    def test(name, &block)
       Printer.test_name name
       instance_eval &block
       Printer.pass
@@ -12,18 +18,14 @@ module Testy
       Printer.error e
     end
 
-    def self.assert(value)
+    def assert(value)
       raise TestError unless value
       value
     end
 
-    def assert(value)
-      self.class.assert value
-    end
-
     def self.method_added(name)
-      test(name) do
-        new.send(name)
+      instance.test(name) do
+        send(name)
       end
     end
   end

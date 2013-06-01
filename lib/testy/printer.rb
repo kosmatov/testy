@@ -7,7 +7,7 @@ module Testy
     def self.pass
       print "PASS\n"
     end
-    
+
     def self.fail
       print "FAIL\n"
     end
