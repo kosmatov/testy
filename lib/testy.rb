@@ -1,5 +1,8 @@
 require "testy/version"
+require "testy/test_case"
+require "testy/printer"
 
 module Testy
-  # Your code goes here...
+  class TestError < Exception
+  end
 end
