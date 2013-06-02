@@ -1,21 +1,29 @@
 module Testy
   class Printer
-    def self.test_name(name)
+    def test_name(name)
       print "\n#{name} -- "
     end
 
-    def self.pass
+    def pass
       print "PASS\n"
     end
 
-    def self.fail
+    def fail(message = nil, exception = nil)
       print "FAIL\n"
     end
 
-    def self.error(e)
+    def error(exception = nil)
       print "ERROR\n"
-      print "\n#{e.message}\n===\n"
-      print e.backtrace.join "\n"
+      print "\n#{exception.message}\n===\n"
+      print exception.backtrace.join "\n"
+    end
+
+    def report(hash)
+      print "Tests finished\n"
+      print "#{hash[:count]} tests completed. "
+      print "#{hash[:passed]} tests successfull. "
+      print "#{hash[:failed]} tests failed. "
+      print "#{hash[:error]} tests with errors.\n"
     end
   end
 end
